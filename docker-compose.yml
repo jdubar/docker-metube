@@ -1,0 +1,20 @@
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:latest
+    container_name: metube
+    env_file: /media/docker_volumes/docker.env
+    volumes:
+      - /media/docker_volumes/metube/downloads:/downloads
+    restart: always
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.metube.rule: "Host(`${DOMAIN_NAME?error}`)"
+      traefik.http.routers.metube.entrypoints: "https"
+      traefik.http.routers.metube.tls: "true"
+      traefik.http.services.metube.loadbalancer.server.port: "8081"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

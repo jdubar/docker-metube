@@ -18,4 +18,4 @@ services:
 networks:
   proxy:
     driver: overlay
-    external: true
+    attachable: true

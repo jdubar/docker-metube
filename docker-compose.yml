@@ -17,4 +17,5 @@ services:
 
 networks:
   proxy:
+    driver: overlay
     external: true
